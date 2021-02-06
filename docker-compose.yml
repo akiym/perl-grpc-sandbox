@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    command: ["sh", "-c", "trap : TERM INT; sleep infinity & wait"]
+    volumes:
+      - .:/app:cached
+      - local:/app/local
+  gapic-showcase:
+    image: gcr.io/gapic-images/gapic-showcase
+    ports:
+      - 7469:7469
+volumes:
+  local:
